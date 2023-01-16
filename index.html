@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animationland</title>
+  <style>
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      counter-reset: game;
+    }
+    .phone {
+      position: relative;
+      border: 8px solid black;
+      border-radius: 40px;
+      width: 300px;
+      height: 600px;
+      background-color: #CCEEFF;
+      box-shadow: 0 19px 38px rgb(0, 0, 0, 0.3), 0 15px 12px rgb(0, 0, 0, 0.22);
+      overflow: hidden;
+    }
+    .title {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .title img {
+      width: 60%;
+    }
+    .total-count {
+      margin-top: 0;
+      position: relative;
+      width: 100%;
+      text-align: center;
+      color: #bf624c;
+    }
+    .total-count::after {
+      content: counter(game);
+    }
+    .layer-1 {
+      position: absolute;
+      z-index: 1;
+      height: 450px;
+      width: 80px;
+      background-color: transparent;
+      bottom: 0;
+      right: 60px; 
+      animation-name: layer;
+      animation-duration: 3s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite; 
+      /* animation-direction: alternate; */
+    }
+    .layer-2 {
+      position: absolute;
+      z-index: 2;
+      height: 450px;
+      width: 80px;
+      background-color: transparent;
+      bottom: 0;
+      left: 60px;
+      animation-name: layer;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;  
+    }
+    .layer-3 {
+      position: absolute;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 220px;
+      height: 400px;
+      background-color: #AC5E55; 
+      bottom: 0;
+      border-radius: 20px 20px 0 0; 
+      overflow: hidden;
+      box-shadow: -15px 10px 37px -10px rgba(0,0,0,0.36), 15px 10px 37px -10px rgba(0,0,0,0.36);
+    }
+    .layer-4 {
+      position: absolute;
+      z-index: 4;
+      height: 350px;
+      width: 80px;
+      background-color: transparent;
+      bottom: 0;
+      left: 60px;
+      animation-name: layer;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-iteration-count: infinite;  
+    }
+    .layer-5 {
+      position: absolute;
+      z-index: 5;
+      width: 200px;
+      height: 300px;
+      background-color: #AC5E55; 
+      bottom: 0;
+      border-radius: 20px 20px 0 0; 
+      overflow: hidden;
+      box-shadow: -15px 10px 37px -10px rgba(0,0,0,0.36), 15px 10px 37px -10px rgba(0,0,0,0.36);
+    }
+    .layer-6 {
+      position: absolute;
+      z-index: 6;  
+      height: 230px;
+      width: 80px;
+      background-color: transparent;
+      bottom: 0;
+      right: 40px;
+      animation-name: layer;
+      animation-duration: 1s;
+      animation-timing-function: ease-in;
+      animation-iteration-count: infinite;
+    }
+    .layer-7 {
+      position: absolute;
+      z-index: 7;
+      width: 160px;
+      height: 180px;
+      background-color: #AC5E55; 
+      bottom: 0;
+      right: 0;
+      border-radius: 20px 20px 0 0; 
+      overflow: hidden;
+      box-shadow: -15px 10px 37px -10px rgba(0,0,0,0.36), 15px 10px 37px -10px rgba(0,0,0,0.36);
+    }
+    .layer-8 {
+      position: absolute;
+      z-index: 8;
+      /* background-color: green; */
+      width: 180px;
+      height: 100px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      bottom: 0;  
+    }
+    .layer-9 {
+      position: absolute;
+      z-index: 9;
+      width: 100px;
+      height: 70px;
+      /* background-color: whitesmoke;  */
+      bottom: 0;
+    }
+    .layer-10 {
+      position: absolute;
+      z-index: 10;  
+      width: 100px;
+      height: 70px;
+      /* background-color: whitesmoke;  */
+      bottom: 0;
+      right: 0;
+    }
+    /***** bunny *****/
+    .left-ear--outer {
+      position: absolute;
+      background-color: white;
+      border-radius: 90%;
+      width: 20px;
+      height: 50px;
+      left: 10px;
+      top: 0;
+    }
+    .left-ear--inner {
+      position: absolute;
+      background-color: pink;
+      border-radius: 90%;
+      width: 10px;
+      height: 50px;
+      left: 15px;
+      top: 8px;
+    }
+    .right-ear--outer {
+      position: absolute;
+      background-color: white;
+      border-radius: 90%;
+      width: 20px;
+      height: 50px;
+      right: 10px;
+      top: 0;
+    }
+    .right-ear--inner {
+      position: absolute;
+      background-color: pink;
+      border-radius: 90%;
+      width: 10px;
+      height: 50px;
+      right: 15px;
+      top: 8px;
+    }
+    .head {
+      background-color: white;
+      border-radius: 50%;
+      height: 80px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+      top: 30px;
+      width: 100%;
+    }
+    .head__eye {
+      background-color: gray;
+      border-radius: 50%;
+      width: 4px;
+      height: 4px;
+      position: absolute;
+      top: 15px;
+      animation-name: blink;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+    
+    .head__eye--left {
+      left: 30px;
+    }
+    .head__eye--right {
+      right: 30px;
+    }
+    /***** mountain *****/
+    .grass {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 15px;
+      background-color: #75bb75;
+    }
+    .grass__zigzag {
+      position: absolute;
+      top: 15px;
+      width: 100%;
+      height: 30px;
+      background-color: #934840;
+      background-image:  linear-gradient(135deg, #75bb75 25%, transparent 25%), linear-gradient(225deg, #75bb75 25%, transparent 25%), linear-gradient(45deg, #AC5E55 25%, transparent 25%), linear-gradient(315deg, #AC5E55 25%, #934840 25%);
+      background-position:  15px 0, 15px 0, 0 0, 0 0;
+      background-size: 30px 30px;
+      background-repeat: repeat;
+    }
+    .shadow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      box-shadow: inset 0px 25px 20px 0px rgba(0,0,0,0.3);
+      /* z-index: 3; */
+    }
+    /***** Estilos del las ultimas capas  *****/
+    .lawn {
+      background-color: #6AAD67;
+    }
+    .cloud {
+      background-color: whitesmoke;
+    }
+    .round__center {
+      width: 50%;
+      height: 100%;
+      margin: 0 auto;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+    }
+    .round__left {
+      position: absolute;
+      height: 70%;
+      width: 50%;
+      left: 0;
+      bottom: 0;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 100px;
+      border-bottom-left-radius: 60px;
+    }
+    .round__right {
+      position: absolute;
+      height: 70%;
+      width: 50%;
+      right: 0;
+      bottom: 0;
+      border-top-right-radius: 60px;
+      border-top-left-radius: 100px;
+      border-bottom-right-radius: 60px;
+    }
+    /***** Estilos de los checkbox *****/
+    input[type=checkbox] {
+      appearance: none;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      position: relative;
+      top: 0;
+      z-index: 2;
+    }
+    input:checked {
+      counter-increment: game;
+    }
+    input[id=bunny-1]:checked {
+      animation-play-state: paused;
+    }
+    /***** Keyframes de las animaciones *****/
+    @keyframes blink {
+      0% {
+        transform: scaleY(1);
+      }
+      5% {
+        transform: scaleY(calc(1 / 4));
+      }
+      10% {
+        transform: scaleY(1);
+      }
+    }
+    @keyframes layer {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(80px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <h1 class="title"><img src="https://i.ibb.co/J3Kn71r/cbd152ddb203fe23ad78261749534e7d.png" alt="Animationland"></h1>
+    <div class="layer-1">
+      <input type="checkbox" id="bunny-1">
+      <!-- bunny one -->
+      <div class="left-ear--outer"></div>
+      <div class="left-ear--inner"></div>
+      <div class="right-ear--outer"></div>
+      <div class="right-ear--inner"></div>
+      <div class="head">
+        <div class="head__eye head__eye--left"></div>
+        <div class="head__eye head__eye--right"></div>
+      </div>
+    </div>
+    <div class="layer-2">
+      <input type="checkbox" id="bunny-2">
+      <!-- bunny two -->
+      <div class="left-ear--outer"></div>
+      <div class="left-ear--inner"></div>
+      <div class="right-ear--outer"></div>
+      <div class="right-ear--inner"></div>
+      <div class="head">
+        <div class="head__eye head__eye--left"></div>
+        <div class="head__eye head__eye--right"></div>
+      </div>
+    </div>
+    <div class="layer-3">
+      <!-- mountain -->
+      <div class="grass"></div>
+      <div class="grass__zigzag"></div>
+      <div class="shadow"></div>
+    </div>
+    <div class="layer-4">
+      <input type="checkbox" id="bunny-3">
+      <!-- bunny three -->
+      <div class="left-ear--outer"></div>
+      <div class="left-ear--inner"></div>
+      <div class="right-ear--outer"></div>
+      <div class="right-ear--inner"></div>
+      <div class="head">
+        <div class="head__eye head__eye--left"></div>
+        <div class="head__eye head__eye--right"></div>
+      </div>
+    </div>
+    <div class="layer-5">
+      <!-- mountain -->
+      <div class="grass"></div>
+      <div class="grass__zigzag"></div>
+      <div class="shadow"></div>
+    </div>
+    <div class="layer-6">
+      <input type="checkbox"  id="bunny-4">
+      <!-- bunny four -->
+      <div class="left-ear--outer"></div>
+      <div class="left-ear--inner"></div>
+      <div class="right-ear--outer"></div>
+      <div class="right-ear--inner"></div>
+      <div class="head">
+        <div class="head__eye head__eye--left"></div>
+        <div class="head__eye head__eye--right"></div>
+      </div>
+    </div>
+    <div class="layer-7">
+      <!-- mountain -->
+      <div class="grass"></div>
+      <div class="grass__zigzag"></div>
+      <div class="shadow"></div>
+    </div>
+    <div class="layer-8">
+      <div class="round__center lawn"></div>
+      <div class="round__left lawn"></div>
+      <div class="round__right lawn"></div>
+    </div>
+    <div class="layer-9">
+      <div class="round__center cloud"></div>
+      <div class="round__left cloud"></div>
+      <div class="round__right cloud"></div>
+    </div>
+    <div class="layer-10">
+      <div class="round__center cloud"></div>
+      <div class="round__left cloud"></div>
+      <div class="round__right cloud"></div>
+    </div>
+    <h3 class="total-count">Score: </h3>
+  </div>
+</body>
+</html>
